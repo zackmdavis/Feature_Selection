@@ -1,1 +1,3 @@
 story.html
+*.png
+__pycache__/
