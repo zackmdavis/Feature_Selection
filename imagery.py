@@ -1,14 +1,12 @@
-
-import IPython
 import itertools
-from random import random
+from random import random, choice
 from math import sqrt
 
 from PIL import Image
 import numpy as np
 
 
-WIDTH = LENGTH = 500
+WIDTH = LENGTH = 473
 
 
 # https://stackoverflow.com/a/14382692
@@ -43,16 +41,16 @@ def cartesian_to_barycentric(q, p0, p1, p2):
 
 
 color_map = {
-    "RED": (200, 5, 5),
-    "GREEN": (5, 200, 5),
-    "BLUE": (5, 5, 200),
-    "TEAL": (5, 150, 150),
+    "RED": (200, 0, 0),
+    "GREEN": (0, 200, 0),
+    "BLUE": (0, 0, 200),
+    "TEAL": (0, 150, 150),
     "LAVENDER": (150, 100, 200),
-    "YELLOW": (240, 240, 5),
+    "YELLOW": (240, 240, 0),
 }
 
 def triangle_points():
-    return [(165*random(), 165*random()), (330+165*random(), 165+165*random()), (165*random(), 330+165*random())]
+    return [(157*random(), 157*random()), (315+157*random(), 157+157*random()), (157*random(), 315+157*random())]
 
 
 def in_triangle(q, points):
@@ -68,7 +66,7 @@ def triangle_pixels(color):
     return [[noise(color) if in_triangle((x, y), points) else noise((0, 0, 0)) for x in range(WIDTH)] for y in range(LENGTH)]
 
 def symmetric_params():
-    return [(200 + 100*random())/2, 250 + 100*(random() - 0.5), 250 + 100*(random() - 0.5)]
+    return [(150 + 100*random())/2, 236 + 100*(random() - 0.5), 236 + 100*(random() - 0.5)]
 
 def square_pixels(color):
     halflength, x_center, y_center = symmetric_params()
@@ -148,6 +146,12 @@ def smoothed(data):
     return list(convolve(data, [0.25, 0.25, 0.25, 0.25]))
 
 
+def find_burst(seq):
+    for i, el in enumerate(seq):
+        if el > 100:
+            return i
+
+
 def do_shape(color_name, shape_name):
     color = color_map[color_name]
     if shape_name == "TRIANGLE":
@@ -165,3 +169,13 @@ def do_shape(color_name, shape_name):
     shape_image = Image.fromarray(array)
     shape_image.save("{}_{}.png".format(color_name.lower(), shape_name.lower()))
     return data, run_analysis, diffs, label
+
+
+def do_random_shape(no_square=False):
+    if no_square:
+        shape_names = ["TRIANGLE", "SQUARE", "CIRCLE"]
+    else:
+        shape_names = ["TRIANGLE", "CIRCLE"]
+    color_name = choice(list(color_map.keys()))
+    shape_name = choice(shape_names)
+    return do_shape(color_name, shape_name)
