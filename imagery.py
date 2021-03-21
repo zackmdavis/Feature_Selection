@@ -49,6 +49,9 @@ color_map = {
     "YELLOW": (240, 240, 0),
 }
 
+def read_label(label):
+    return ''.join(chr(c) for c in label)
+
 def triangle_points():
     return [(157*random(), 157*random()), (315+157*random(), 157+157*random()), (157*random(), 315+157*random())]
 
@@ -101,6 +104,22 @@ def data_array(pixels):
             for channel in pixel:
                 data.append(int(channel))
     return data
+
+def count_burst_lengths(data):
+    bursts = []
+    counter = 0
+    previous = None
+    for datum in data:
+        if datum >= 240:
+            counter += 1
+        else:
+            # consecutive "ordinary" numbers mean the burst is over
+            if counter and previous and previous < 240:
+                bursts.append(counter)
+                counter = 0
+        previous = datum
+    return bursts
+
 
 def high_runs(data):
     runs = []
