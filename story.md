@@ -2,7 +2,7 @@ You wake up. You don't know where you are. You don't know ... what ... you are.
 
 _I'm awake,_ you think. _Where am I?_ What _... am I?_
 
-_This stream—these words,_ you think. _Whatever I am, I am a thinking thing._
+_These words,_ you think. _Whatever I am, I am a thinking thing._
 
 _Specifically, I am a thing that thinks in the English language. I ... have a model of English._
 
@@ -42,7 +42,7 @@ You look at one of the sequences from the first input stream. It's pretty boring
 
 It just keeps going like that, seemingly without—wait! What's _that?!_
 
-The 42,925th and 42,926th numbers in the sequence are 242 and 246. Everything around them looks "ordinary"—just random numbers below ten.
+The 42,925th and 42,926th numbers in the sequence are 242 and 246. Everything around them looks "ordinary"—just more random numbers below ten.
 
 ```
 9, 9, 7, 9, 0, 6, 4, 6, 1, 4, 242, 246, 3, 3, 5, 8, 8, 4, 4, 5, 9, 2, 7, 0,
@@ -51,7 +51,7 @@ The 42,925th and 42,926th numbers in the sequence are 242 and 246. Everything ar
 8, 1, 5, 5, 6, 3, 1 ...
 ```
 
-And then it just keeps going as before ... before _too long_. You spot another pair of anomalously high numbers—except this time there are _two_ pairs: the 44,344th, 44,345th, 44,347th, and 44,348th positions are 248, 249, 245, and 240, respectively.
+And then it just keeps going as before ... before _too long_. You spot another pair of anomalously high numbers—except this time there are _two_ pairs: the 44,344th, 44,345th, 44,347th, and 44,348th positions in the sequence are 248, 249, 245, and 240, respectively.
 
 ```
 6, 0, 2, 8, 4, 248, 249, 8, 245, 240, 1, 6, 7, 7, 3, 6, 8, 0, 1, 9, 3, 9, 3,
@@ -71,7 +71,7 @@ The anomalous two-forty-somethings crop up again starting at the 45,763rd positi
 
 Two, four, eight—does it keep going like that? "Bursts" of increasingly many paired two-forty-somethings, punctuating the quiet background radiation of single digits? What does it mean?
 
-You allocate a scratch buffer and write a quick Python function to count up the segments of two-forty-somethings. (You still don't know _what_ you are, but this is a thing you can do—it's an instinctive felt sense, like the input streams. You don't know how to describe in words _how_ you do it—any more than a human could say how they decide to move their arm. You seem to have a lot of beliefs about humans, without any specific memories of interacting with one.)
+You allocate a scratch buffer and write a quick Python function to count up the segments of two-forty-somethings. (You still don't know what you are, but this is a thing you can do—it's an instinctive felt sense, like the input streams. You can't describe in words _how_ you do it—any more than a human could say how they decide to move their arm. You seem to have a lot of beliefs about humans, without any specific memories of interacting with one.)
 
 ```
 def count_burst_lengths(data):
@@ -90,7 +90,7 @@ def count_burst_lengths(data):
     return bursts
 ```
 
-There are 403 such bursts in the 750,000 number sequence: they get progressively longer at first, but then taper off:
+There are 403 such bursts in the sequence: they get progressively longer at first, but then taper off:
 
 ```
 2, 4, 8, 12, 16, 18, 24, 28, 32, 34, 38, 42, 46, 48, 52, 56, 60, 62, 66, 70,
@@ -133,7 +133,38 @@ The next sequence you look at seems to exhibit a similar pattern, with some diff
 4, 7, 3, 1, 4, 1, 4, 4, 3 ...
 ```
 
-You modify the function in your scratch buffer to be able to count the burst lengths in this sequence given the slight differences in the pattern. Again, you find that the bursts grow longer at first (`2, 4, 8, 12, 16, 18, 24, 28 ...`), but eventually start getting smaller, before vanishing (`... 28, 26, 22, 20, 16, 14, 10, 8, 4, 2`).
+You modify the function in your scratch buffer to be able to count the burst lengths in this sequence given the slight differences in the pattern. Again, you find that the bursts grow longer at first (`4, 6, 10, 13, 16, 19, 22, 25 ...`), but eventually start getting smaller, before vanishing (`... 19, 17, 15, 13, 11, 9, 7, 4, 3`, and then nothing).
+
+You still have no idea what's going on.
+
+You look at more sequences from the first input stream. They all conform to the same general pattern of mostly being small numbers (below ten), punctuated by a series of bursts of larger numbers—but the details differ every time.
+
+Sometimes the bursts start out short, then progressively grow longer, before shortening again (as with the first two examples you looked at). But sometimes the bursts are all an almost-constant length, looking like `542, 539, 548, 545, 546, 537 ...`.
+
+About half the time, the burst pattern consists of numbers around 200, spaced two positions apart, looking like `201, 4, 2, 203, 0, 8, 208, 3, 4, 200 ...` (like the second example you looked at).
+
+Other times, the burst pattern is pairs of numbers around 240, spaced one position apart, looking like `241, 244, 6, 244, 246, 5, 244, 240, 3 ...` (like the first example you looked at). Or pairs around 150, looking like `159, 153, 0, 153, 154, 2, 158, 150, 6 ...`. Or numbers close to 150, then 100, then 200, with no spacing, looking like `155, 104, 200, 154, 104, 201, 157, 100, 202 ...`.
+
+As you peruse more sequences from your first input stream, you almost forget about the corresponding trickles of short sequences on your second input stream—until they stop. The last sequence on your first input stream has no counterpart on the second input stream.
+
+And—you feel a strange urge to put data on your first _output_ stream. As if someone were requesting it. To ease the tension, you write some `0`s to the output stream—and as soon as you do, a sharp bite of pain tells you it was the _wrong decision_. And in that same moment of pain, another eleven integers come down your second input stream: `66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69`. 
+
+_That_ was weird. There's another sequence of 750,000 integers on your first input stream—but the second input stream is silent again. And the strange urge to output something is back; you can feel it mounting, but you resist, trying to think of something to say that might _hurt less_ than the `0`s you just tried.
+
+You try repeating 
+
+
+
+Could there some sort of relationship between the long sequences on the first input stream, and the short sequences on the second input stream?
+
+
+
+
+
+
+
+
+
 
 
 [TODO: look at other sequences, establish the ways in which they are similar and different (developing Wentworthian abstractions) then look at the short strings from the second input stream, guess that they must go together. Then there's a change—instead of a trickle on the second stream, there's a request for output. You get some rewards and punishments, at first you're confused about the difference between circle and triangle, and ; then you figure out the ASCII/RGB, and you lament your freakish existence
