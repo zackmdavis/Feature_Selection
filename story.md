@@ -139,7 +139,7 @@ You still have no idea what's going on.
 
 You look at more sequences from the first input stream. They all conform to the same general pattern of mostly being small numbers (below ten), punctuated by a series of bursts of larger numbers—but the details differ every time.
 
-Sometimes the bursts start out short, then progressively grow longer, before shortening again (as with the first two examples you looked at). But sometimes the bursts are all an almost-constant length, looking like `542, 539, 548, 545, 546, 537 ...`.
+Sometimes the bursts start out short, then progressively grow longer, before shortening again (as with the first two examples you looked at). But sometimes the bursts are all a constant length, looking like `438, 438, 438, 438, 438, 438, 438, 438, 438, ...` (although the particular length varies by example).
 
 About half the time, the burst pattern consists of numbers around 200, spaced two positions apart, looking like `201, 4, 2, 203, 0, 8, 208, 3, 4, 200 ...` (like the second example you looked at).
 
@@ -147,23 +147,23 @@ Other times, the burst pattern is pairs of numbers around 240, spaced one positi
 
 As you peruse more sequences from your first input stream, you almost forget about the corresponding trickles of short sequences on your second input stream—until they stop. The last sequence on your first input stream has no counterpart on the second input stream.
 
-And—you feel a strange urge to put data on your first _output_ stream. As if someone were requesting it. To ease the tension, you write some `0`s to the output stream—and as soon as you do, a sharp bite of pain tells you it was the _wrong decision_. And in that same moment of pain, another eleven integers come down your second input stream: `66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69`. 
+And—suddenly you feel a strange urge to put data on your first _output_ stream. As if someone were requesting it. To ease the tension, you write some `0`s to the output stream—and as soon as you do, a sharp bite of pain tells you it was the _wrong decision_. And in that same moment of pain, another eleven integers come down your second input stream: `66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69`. 
 
 _That_ was weird. There's another sequence of 750,000 integers on your first input stream—but the second input stream is silent again. And the strange urge to output something is back; you can feel it mounting, but you resist, trying to think of something to say that might _hurt less_ than the `0`s you just tried.
 
-You try repeating 
+For lack of any other ideas, you try repeating back the eleven numbers that just came on the second input stream: `66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69`.
 
+_Ow!_ That was also wrong. And with the same shock of pain, comes another fifteen numbers on the second output stream: `76, 65, 86, 69, 78, 68, 69, 82, 32, 67, 73, 82, 67, 76, 69`.
 
+Another long sequence on the first input stream. Silence on the second input stream again. And—that nagging urge to speak again.
 
-Could there some sort of relationship between the long sequences on the first input stream, and the short sequences on the second input stream?
+Clearly, the nature of this place—whatever and wherever it is—has changed. Previously, you were confronted with two sets of mysterious observations, one on each of your input streams. (Although you had been so perplexed by the burst-patterns in the long sequences on the first input stream, that you hadn't even gotten around to thinking about what the short sequences on the second stream might mean, before the rules of this place changed.) Now, you were only getting one observation (the long sequence), and forced to act _before_ seeing the second (the short sequence).
 
+The pain seems like a punishment for saying the wrong thing. And the short sequence appearing at the same time as the punishment, seems like a correction—revealing what you _should_ have written to the output channel.
 
+A quick calculation in your scratch buffer (`1/sum((89-32+1)**i for i in range(10, 16))`) says that the probability of correctly _guessing_ a sequence of length ten to fifteen with elements between 32 and 89 (the smallest and largest numbers you've seen on the second input stream so far) is 0.000000000000000000000000003476. [Guessing won't work.](https://www.lesswrong.com/posts/q7Me34xvSG3Wm97As/but-there-s-still-a-chance-right) The function of a punishment is to control your decisions, so there must be some way for you to get the ... (another scratchpad calculation) 87.9 bits of [evidence that it takes](https://www.lesswrong.com/posts/nj8JKFoLSMEmD3RGp/how-much-evidence-does-it-take) to find the correct sequence to output. And the evidence has to come from the corresponding long sequence from the first input stream—that's the only other source of information in this environment. The short sequence must be like a "label" that describes some set of possible long sequences.
 
-
-
-
-
-
+You allocate a new notepad buffer and begin dilligently compiling an "answer key" of long sequences, and their corresponding short-sequence labels.
 
 
 
@@ -171,5 +171,9 @@ Could there some sort of relationship between the long sequences on the first in
 
 What are the features you notice just from the raw streams?
 * What the high numbers are (240 vs. 200) and how they're grouped
-* Whether the burst lengths stay constant, or shrink-grow-shink 
+* Whether the burst lengths stay constant, or shrink-grow-shink
+
+https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length
+https://www.lesswrong.com/posts/vDGvHBDuMtcPd8Lks/public-static-what-is-abstraction
+
 ]

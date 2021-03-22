@@ -6,6 +6,9 @@ from PIL import Image
 import numpy as np
 
 
+# TODO fix before publicaiton: run analysis seems to have a bug for lavender?! Square lengths are non-constant!?
+
+
 WIDTH = LENGTH = 473
 
 
