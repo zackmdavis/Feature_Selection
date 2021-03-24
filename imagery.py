@@ -193,11 +193,35 @@ def do_shape(color_name, shape_name):
     return data, run_analysis, diffs, label
 
 
-def do_random_shape(no_square=False):
+def random_shape_spec(no_square=False):
     if no_square:
-        shape_names = ["TRIANGLE", "SQUARE", "CIRCLE"]
-    else:
         shape_names = ["TRIANGLE", "CIRCLE"]
+    else:
+        shape_names = ["TRIANGLE", "SQUARE", "CIRCLE"]
     color_name = choice(list(color_map.keys()))
     shape_name = choice(shape_names)
+    return color_name, shape_name
+
+
+def do_random_shape(no_square=False):
+    color_name, shape_name = random_shape_spec(no_square=no_square)
     return do_shape(color_name, shape_name)
+
+def do_random_answer_key_table_entry():
+    color_name, shape_name = random_shape_spec()
+    data, run_analysis, diffs, label = do_shape(color_name, shape_name)
+    i = find_burst(data) + 1
+    if shape_name in ["TRIANGLE", "CIRCLE"]:
+        lengths = "increasing, then decreasing"
+    else:
+        lengths = "constant"
+
+    if color_name in ["GREEN", "BLUE"]:
+        pattern_essence = "RED"
+    else:
+        pattern_essence = color_name
+
+    pattern = ', '.join(str(c) for c in color_map[color_name])
+
+    print_label = ', '.join(str(c) for c in label)
+    return "<tr><td>{lengths}</td><td>{pattern}</td><td>{i}</td><td>{print_label}</td></tr>".format(**locals())

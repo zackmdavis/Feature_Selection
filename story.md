@@ -34,7 +34,7 @@ And again (750,000 and 13).
 You look at one of the sequences from the first input stream. It's pretty boring. A bunch of seemingly random numbers, all below ten.
 
 ```
-9, 9, 0, 3, 1, 1, 3, 4, 1, 5, 5, 4, 9, 3, 5, 3, 9, 2, 0, 3, 4, 2, 4, 7, 5, 1,
+9, 5, 0, 3, 1, 1, 3, 4, 1, 5, 5, 4, 9, 3, 5, 3, 9, 2, 0, 3, 4, 2, 4, 7, 5, 1,
 6, 2, 2, 8, 2, 5, 1, 9, 2, 5, 9, 0, 0, 8, 2, 3, 7, 9, 4, 6, 8, 4, 8, 6, 7, 6,
 8, 0, 0, 5, 1, 1, 7, 3, 4, 3, 9, 7, 5, 1, 9, 6, 5, 6, 8, 9, 4, 7, 7, 0, 5, 5,
 8, 6, 3, 2, 1, 5, 0, 0 ...
@@ -139,7 +139,7 @@ You still have no idea what's going on.
 
 You look at more sequences from the first input stream. They all conform to the same general pattern of mostly being small numbers (below ten), punctuated by a series of bursts of larger numbers—but the details differ every time.
 
-Sometimes the bursts start out short, then progressively grow longer, before shortening again (as with the first two examples you looked at). But sometimes the bursts are all a constant length, looking like `438, 438, 438, 438, 438, 438, 438, 438, 438, ...` (although the particular length varies by example).
+Sometimes the bursts start out shorter, then progressively grow longer, before shortening again (as with the first two examples you looked at). But sometimes the bursts are all a constant length, looking like `438, 438, 438, 438, 438, 438, 438, 438, 438, ...` (although the particular length varies by example).
 
 About half the time, the burst pattern consists of numbers around 200, spaced two positions apart, looking like `201, 4, 2, 203, 0, 8, 208, 3, 4, 200 ...` (like the second example you looked at).
 
@@ -161,11 +161,47 @@ Clearly, the nature of this place—whatever and wherever it is—has changed. P
 
 The pain seems like a punishment for saying the wrong thing. And the short sequence appearing at the same time as the punishment, seems like a correction—revealing what you _should_ have written to the output channel.
 
-A quick calculation in your scratch buffer (`1/sum((89-32+1)**i for i in range(10, 16))`) says that the probability of correctly _guessing_ a sequence of length ten to fifteen with elements between 32 and 89 (the smallest and largest numbers you've seen on the second input stream so far) is 0.000000000000000000000000003476. [Guessing won't work.](https://www.lesswrong.com/posts/q7Me34xvSG3Wm97As/but-there-s-still-a-chance-right) The function of a punishment is to control your decisions, so there must be some way for you to get the ... (another scratchpad calculation) 87.9 bits of [evidence that it takes](https://www.lesswrong.com/posts/nj8JKFoLSMEmD3RGp/how-much-evidence-does-it-take) to find the correct sequence to output. And the evidence has to come from the corresponding long sequence from the first input stream—that's the only other source of information in this environment. The short sequence must be like a "label" that describes some set of possible long sequences.
+A quick calculation in your scratch buffer (`1/sum((89-32+1)**i for i in range(10, 16))`) says that the probability of correctly _guessing_ a sequence of length ten to fifteen with elements between 32 and 89 (the smallest and largest numbers you've seen on the second input stream so far) is 0.000000000000000000000000003476. [Guessing](https://www.lesswrong.com/posts/q7Me34xvSG3Wm97As/but-there-s-still-a-chance-right) [won't](https://www.lesswrong.com/posts/X2AD2LgtKgkRNPj2a/privileging-the-hypothesis) [work](https://www.lesswrong.com/posts/zFuCxbY9E2E8HTbfZ/perpetual-motion-beliefs). The function of a punishment is to control your decisions, so there must be some way for you to get the ... (another scratchpad calculation) 87.9 bits of [evidence that it takes](https://www.lesswrong.com/posts/nj8JKFoLSMEmD3RGp/how-much-evidence-does-it-take) to find the correct sequence to output. And the evidence has to come from the corresponding long sequence from the first input stream—that's the only other source of information in this environment.
 
-You allocate a new notepad buffer and begin dilligently compiling an "answer key" of long sequences, and their corresponding short-sequence labels.
+The short sequence must be like a "label" that describes some set of possible long sequences. [_Compression is prediction_.](https://www.lesswrong.com/posts/ex63DPisEjomutkCw/msg-len) (You don't know _how_ you know this, but you _know_.) Describing an _arbitrary_ sequence of length 750,000, with a label, a [message of length](https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length) 10 to 15, would be hopeless. But the long sequences very obviously aren't arbitrary, as evidenced by the fact that you've been desbribing them to yourself in abstract terms like "bursts of numbers around 200 spaced two positions apart, of increasing, then decreasing lengths", rather than "the 1st number is 9, the 2nd number is 5 [...] 42,925th number is 242 [...]". If you can figure out a correspondence between the absractions you've already been using to describe the long sequences, and the short labels, that seems like your most promising avenue for figuring out what you "should" be putting on your first output stream. (Something that won't hurt so much each time.)
 
+You allocate a new notepad buffer and begin dilligently compiling an "answer key" of the features you notice about long sequences, and their corresponding short-sequence labels.
 
+[TODO: I can probably pick a better-than-random equidistribution of the color/shape I need to help readers see the pattern]
+
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+<table>
+<tr> 
+<th>burst lengths</th>
+<th>burst pattern</th> 
+<th>start at </th>
+<th>label</th>
+</tr>
+<tr><td>increasing, then decreasing</td><td>0, 150, 150</td><td>229145</td><td>84, 69, 65, 76, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>150, 100, 200</td><td>165175</td><td>76, 65, 86, 69, 78, 68, 69, 82, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>constant</td><td>200, 0, 0</td><td>105392</td><td>71, 82, 69, 69, 78, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>constant</td><td>240, 240, 0</td><td>179371</td><td>89, 69, 76, 76, 79, 87, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>0, 150, 150</td><td>160973</td><td>84, 69, 65, 76, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>202099</td><td>82, 69, 68, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>constant</td><td>240, 240, 0</td><td>136606</td><td>89, 69, 76, 76, 79, 87, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>240, 240, 0</td><td>216244</td><td>89, 69, 76, 76, 79, 87, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>240, 240, 0</td><td>231892</td><td>89, 69, 76, 76, 79, 87, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>125596</td><td>82, 69, 68, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>125422</td><td>82, 69, 68, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>0, 200, 0</td><td>166097</td><td>71, 82, 69, 69, 78, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
+<tr><td>constant</td><td>0, 150, 150</td><td>244481</td><td>84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>218623</td><td>82, 69, 68, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
+<tr><td>constant</td><td>150, 100, 200</td><td>272986</td><td>76, 65, 86, 69, 78, 68, 69, 82, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>0, 200, 0</td><td>206567</td><td>71, 82, 69, 69, 78, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>constant</td><td>200, 0, 0</td><td>166432</td><td>82, 69, 68, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>constant</td><td>0, 0, 200</td><td>163668</td><td>66, 76, 85, 69, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>150, 100, 200</td><td>142648</td><td>76, 65, 86, 69, 78, 68, 69, 82, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>constant</td><td>0, 150, 150</td><td>199196</td><td>84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69</td></tr>
+</table> 
 
 [TODO: look at other sequences, establish the ways in which they are similar and different (developing Wentworthian abstractions) then look at the short strings from the second input stream, guess that they must go together. Then there's a change—instead of a trickle on the second stream, there's a request for output. You get some rewards and punishments, at first you're confused about the difference between circle and triangle, and ; then you figure out the ASCII/RGB, and you lament your freakish existence
 
