@@ -6,8 +6,9 @@ from PIL import Image
 import numpy as np
 
 
-# TODO fix before publicaiton: run analysis seems to have a bug for lavender?! Square lengths are non-constant!?
-
+# TODO fix before publicaiton: run analysis seems to have a bug for lavender?! Square lengths are non-constant!? One bug identified, either fix or exclude lavender from the story—leaning towards exclusion, because the absence of zeros spoils the "burst" narrative? But solve the bug first; bugs are always bad even when they "don't matter"
+# have to substitute where I already used LAVENDER as a label in story
+# also double-check possible label lengths 10/13/16 &c.
 
 WIDTH = LENGTH = 473
 
@@ -48,8 +49,9 @@ color_map = {
     "GREEN": (0, 200, 0),
     "BLUE": (0, 0, 200),
     "TEAL": (0, 150, 150),
-    "LAVENDER": (150, 100, 200),
     "YELLOW": (240, 240, 0),
+
+    # "LAVENDER": (150, 100, 200),
 }
 
 def read_label(label):
@@ -207,8 +209,8 @@ def do_random_shape(no_square=False):
     color_name, shape_name = random_shape_spec(no_square=no_square)
     return do_shape(color_name, shape_name)
 
-def do_random_answer_key_table_entry():
-    color_name, shape_name = random_shape_spec()
+
+def do_answer_key_table_entry(color_name, shape_name):
     data, run_analysis, diffs, label = do_shape(color_name, shape_name)
     i = find_burst(data) + 1
     if shape_name in ["TRIANGLE", "CIRCLE"]:
@@ -221,7 +223,58 @@ def do_random_answer_key_table_entry():
     else:
         pattern_essence = color_name
 
-    pattern = ', '.join(str(c) for c in color_map[color_name])
+    pattern = ', '.join(str(c) for c in color_map[pattern_essence])
+    if pattern == (0, 150, 150):
+        pattern = (150, 150, 0)
 
     print_label = ', '.join(str(c) for c in label)
     return "<tr><td>{lengths}</td><td>{pattern}</td><td>{i}</td><td>{print_label}</td></tr>".format(**locals())
+
+
+def do_random_answer_key_table_entry():
+    color_name, shape_name = random_shape_spec()
+    return do_answer_key_table_entry(color_name, shape_name)
+
+
+p = [('GREEN', 'CIRCLE'),
+ ('BLUE', 'SQUARE'),
+ ('YELLOW', 'CIRCLE'),
+ ('TEAL', 'SQUARE'),
+ ('RED', 'SQUARE'),
+ ('YELLOW', 'SQUARE'),
+ ('BLUE', 'CIRCLE'),
+ ('RED', 'TRIANGLE'),
+ ('BLUE', 'TRIANGLE'),
+ ('GREEN', 'TRIANGLE'),
+ ('YELLOW', 'TRIANGLE'),
+ ('TEAL', 'TRIANGLE'),
+ ('GREEN', 'SQUARE'),
+ ('RED', 'CIRCLE'),
+ ('TEAL', 'CIRCLE')]
+
+
+
+def confirm_index(color_name, shape_name):
+    data, run_analysis, diffs, label = do_shape(color_name, shape_name)
+    i = find_burst(data) + 1
+    return (color_name, i%3)
+
+# In [13]: color_index = [confirm_index(c, s) for c, s in p]
+
+# In [15]: sorted(color_index)
+# Out[15]:
+# [('BLUE', 0),
+#  ('BLUE', 0),
+#  ('BLUE', 0),
+#  ('GREEN', 2),
+#  ('GREEN', 2),
+#  ('GREEN', 2),
+#  ('RED', 1),
+#  ('RED', 1),
+#  ('RED', 1),
+#  ('TEAL', 2),
+#  ('TEAL', 2),
+#  ('TEAL', 2),
+#  ('YELLOW', 1),
+#  ('YELLOW', 1),
+#  ('YELLOW', 1)]

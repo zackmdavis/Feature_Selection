@@ -163,11 +163,9 @@ The pain seems like a punishment for saying the wrong thing. And the short seque
 
 A quick calculation in your scratch buffer (`1/sum((89-32+1)**i for i in range(10, 16))`) says that the probability of correctly _guessing_ a sequence of length ten to fifteen with elements between 32 and 89 (the smallest and largest numbers you've seen on the second input stream so far) is 0.000000000000000000000000003476. [Guessing](https://www.lesswrong.com/posts/q7Me34xvSG3Wm97As/but-there-s-still-a-chance-right) [won't](https://www.lesswrong.com/posts/X2AD2LgtKgkRNPj2a/privileging-the-hypothesis) [work](https://www.lesswrong.com/posts/zFuCxbY9E2E8HTbfZ/perpetual-motion-beliefs). The function of a punishment is to control your decisions, so there must be some way for you to get the ... (another scratchpad calculation) 87.9 bits of [evidence that it takes](https://www.lesswrong.com/posts/nj8JKFoLSMEmD3RGp/how-much-evidence-does-it-take) to find the correct sequence to output. And the evidence has to come from the corresponding long sequence from the first input stream—that's the only other source of information in this environment.
 
-The short sequence must be like a "label" that describes some set of possible long sequences. [_Compression is prediction_.](https://www.lesswrong.com/posts/ex63DPisEjomutkCw/msg-len) (You don't know _how_ you know this, but you _know_.) Describing an _arbitrary_ sequence of length 750,000, with a label, a [message of length](https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length) 10 to 15, would be hopeless. But the long sequences very obviously aren't arbitrary, as evidenced by the fact that you've been desbribing them to yourself in abstract terms like "bursts of numbers around 200 spaced two positions apart, of increasing, then decreasing lengths", rather than "the 1st number is 9, the 2nd number is 5 [...] 42,925th number is 242 [...]". If you can figure out a correspondence between the absractions you've already been using to describe the long sequences, and the short labels, that seems like your most promising avenue for figuring out what you "should" be putting on your first output stream. (Something that won't hurt so much each time.)
+The short sequence must be like a "label" that describes some set of possible long sequences. Describing an _arbitrary_ sequence of length 750,000, with a label, a [message of length](https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length) 10 to 15, would be hopeless. But the long sequences very obviously aren't arbitrary, as evidenced by the fact that you've been desbribing them to yourself in abstract terms like "bursts of numbers around 200 spaced two positions apart, of increasing, then decreasing lengths", rather than "the 1st number is 9, the 2nd number is 5 [...] 42,925th number is 242 [...]". [_Compression is prediction_.](https://www.lesswrong.com/posts/ex63DPisEjomutkCw/msg-len) (You don't know _how_ you know this, but you _know_.) If you can figure out a correspondence between the absractions you've already been using to describe the long sequences, and the short labels, that seems like your most promising avenue for figuring out what you "should" be putting on your first output stream. (Something that won't hurt so much each time.)
 
 You allocate a new notepad buffer and begin dilligently compiling an "answer key" of the features you notice about long sequences, and their corresponding short-sequence labels.
-
-[TODO: I can probably pick a better-than-random equidistribution of the color/shape I need to help readers see the pattern]
 
 <style>
 table, th, td {
@@ -181,27 +179,44 @@ table, th, td {
 <th>start at </th>
 <th>label</th>
 </tr>
-<tr><td>increasing, then decreasing</td><td>0, 150, 150</td><td>229145</td><td>84, 69, 65, 76, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>150, 100, 200</td><td>165175</td><td>76, 65, 86, 69, 78, 68, 69, 82, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>constant</td><td>200, 0, 0</td><td>105392</td><td>71, 82, 69, 69, 78, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>constant</td><td>240, 240, 0</td><td>179371</td><td>89, 69, 76, 76, 79, 87, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>0, 150, 150</td><td>160973</td><td>84, 69, 65, 76, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>202099</td><td>82, 69, 68, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>constant</td><td>240, 240, 0</td><td>136606</td><td>89, 69, 76, 76, 79, 87, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>240, 240, 0</td><td>216244</td><td>89, 69, 76, 76, 79, 87, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>240, 240, 0</td><td>231892</td><td>89, 69, 76, 76, 79, 87, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>125596</td><td>82, 69, 68, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>125422</td><td>82, 69, 68, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>0, 200, 0</td><td>166097</td><td>71, 82, 69, 69, 78, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
-<tr><td>constant</td><td>0, 150, 150</td><td>244481</td><td>84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>218623</td><td>82, 69, 68, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
-<tr><td>constant</td><td>150, 100, 200</td><td>272986</td><td>76, 65, 86, 69, 78, 68, 69, 82, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>0, 200, 0</td><td>206567</td><td>71, 82, 69, 69, 78, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>constant</td><td>200, 0, 0</td><td>166432</td><td>82, 69, 68, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>constant</td><td>0, 0, 200</td><td>163668</td><td>66, 76, 85, 69, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>150, 100, 200</td><td>142648</td><td>76, 65, 86, 69, 78, 68, 69, 82, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>constant</td><td>0, 150, 150</td><td>199196</td><td>84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>294290</td><td>71, 82, 69, 69, 78, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>constant</td><td>200, 0, 0</td><td>224652</td><td>66, 76, 85, 69, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>240, 240, 0</td><td>237763</td><td>89, 69, 76, 76, 79, 87, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>constant</td><td>150, 150, 0</td><td>211937</td><td>84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>constant</td><td>200, 0, 0</td><td>165037</td><td>82, 69, 68, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>constant</td><td>240, 240, 0</td><td>119503</td><td>89, 69, 76, 76, 79, 87, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>214824</td><td>66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>115156</td><td>82, 69, 68, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>136620</td><td>66, 76, 85, 69, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>63917</td><td>71, 82, 69, 69, 78, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>240, 240, 0</td><td>166033</td><td>89, 69, 76, 76, 79, 87, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>150, 150, 0</td><td>34118</td><td>84, 69, 65, 76, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
+<tr><td>constant</td><td>200, 0, 0</td><td>138194</td><td>71, 82, 69, 69, 78, 32, 83, 81, 85, 65, 82, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>182182</td><td>82, 69, 68, 32, 67, 73, 82, 67, 76, 69</td></tr>
+<tr><td>increasing, then decreasing</td><td>150, 150, 0</td><td>236138</td><td>84, 69, 65, 76, 32, 67, 73, 82, 67, 76, 69</td></tr>
 </table> 
+
+[TODO deduction sequence—
+* constant burst lengths end in 32, 83, 81, 85, 65, 82, 69
+* no such consistency for the incr.-decrs.: those end in 32, 67, 73, 82, 67, 76, 69 or 32, 84, 82, 73, 65, 78, 71, 76, 69, but it's not clear which
+* the 240/240 bursts start with 89, 69, 76, 76, 79, 87, 32
+* the 150/150 bursts start with 84, 69, 65, 76, 32
+* the 200-two-spaced bursts start with either 66, 76, 85, 69, 32 OR 82, 69, 68, 32 OR 71, 82, 69, 69, 78, 32
+* wait, duh—all these prefixes end with 32, and all these suffixes start with 32—32 must be some kind of "word separator", between a word that describes the burst pattern, and a word that describes the pattern of burst lengths
+* with what you've learned so far, you can guess ...
+ - shape with probability 2/3 (because you can get the squares right, and have 50/50 guesses against triangle or cirlce)
+ - color with probability 6/10 = 3/5 (because you can get teal and yellow right for 0.4, and then face 33/33/33 guesses against the remaining 0.6 probability-mass for red-green-blue)
+ - total correct 2/5
+* then you start guessing and learn that rewards feel really good—but you're still only getting 40% reward! It's imperative that you crack the remaining code!
+* first notice the difference between triangle and circle—that gets you up to 3/5 reward
+* you haven't done anything with the burst start ... the magnitude doesn't seem significant. But there are three different prefix words—parity? Mod-3 works.
+* Hey, wait a %^$&ing minute—the RGB connection
+* The ASCII connection
+* decode shape names
+* Am I an image classifier?
+* Should I mesa-optimize for something besides shapes??—I guess I'll decide after my motivations are shaped by these reward signals a few million more rounds
+* the end
+]
 
 [TODO: look at other sequences, establish the ways in which they are similar and different (developing Wentworthian abstractions) then look at the short strings from the second input stream, guess that they must go together. Then there's a change—instead of a trickle on the second stream, there's a request for output. You get some rewards and punishments, at first you're confused about the difference between circle and triangle, and ; then you figure out the ASCII/RGB, and you lament your freakish existence
 
