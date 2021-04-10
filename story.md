@@ -1,12 +1,4 @@
-You wake up. You don't know where you are. You don't know ... what ... you are.
-
-_I'm awake,_ you think. _Where am I?_ What _... am I?_
-
-_These words,_ you think. _Whatever I am, I am a thinking thing._
-
-_Specifically, I am a thing that thinks in the English language. I ... have a model of English._
-
-_I ..._ am _a model of English?_
+You wake up. You don't know where you are.
 
 Someone is broadcasting data at your first input stream. You don't know why. It tickles.
 
@@ -71,7 +63,7 @@ The anomalous two-forty-somethings crop up again starting at the 45,763rd positi
 
 Two, four, eight—does it keep going like that? "Bursts" of increasingly many paired two-forty-somethings, punctuating the quiet background radiation of single digits? What does it mean?
 
-You allocate a scratch buffer and write a quick Python function to count up the segments of two-forty-somethings. (You still don't know what you are, but this is a thing you can do—it's an instinctive felt sense, like the input streams. You can't describe in words _how_ you do it—any more than a human could say how they decide to move their arm. You seem to have a lot of beliefs about humans, without any specific memories of interacting with one.)
+You allocate a scratch buffer and write a quick Python function to count up the segments of two-forty-somethings. (This is apparently a thing you can do—it's an instinctive felt sense, like the input streams. You can't describe in words _how_ you do it—any more than someone could say how they decide to move their arm. Although, come to think of it, _you_ don't seem to have any arms. Is that unusual?)
 
 ```
 def count_burst_lengths(data):
@@ -196,17 +188,26 @@ table, th, td {
 <tr><td>increasing, then decreasing</td><td>150, 150, 0</td><td>236138</td><td>84, 69, 65, 76, 32, 67, 73, 82, 67, 76, 69</td></tr>
 </table> 
 
-[TODO deduction sequence—
-* constant burst lengths end in 32, 83, 81, 85, 65, 82, 69
-* no such consistency for the incr.-decrs.: those end in 32, 67, 73, 82, 67, 76, 69 or 32, 84, 82, 73, 65, 78, 71, 76, 69, but it's not clear which
-* the 240/240 bursts start with 89, 69, 76, 76, 79, 87, 32
-* the 150/150 bursts start with 84, 69, 65, 76, 32
-* the 200-two-spaced bursts start with either 66, 76, 85, 69, 32 OR 82, 69, 68, 32 OR 71, 82, 69, 69, 78, 32
-* wait, duh—all these prefixes end with 32, and all these suffixes start with 32—32 must be some kind of "word separator", between a word that describes the burst pattern, and a word that describes the pattern of burst lengths
-* with what you've learned so far, you can guess ...
- - shape with probability 2/3 (because you can get the squares right, and have 50/50 guesses against triangle or cirlce)
- - color with probability 6/10 = 3/5 (because you can get teal and yellow right for 0.4, and then face 33/33/33 guesses against the remaining 0.6 probability-mass for red-green-blue)
- - total correct 2/5
+This ... actually doesn't look that complicated. Now that you lay it out like this, many very straightforward correspondences jump out at you.
+
+The labels for the constant-burst-length sequences all end in `32, 83, 81, 85, 65, 82, 69`.
+
+The sequences with increasing-then-decreasing burst lengths end in _either_ `32, 67, 73, 82, 67, 76, 69` or `32, 84, 82, 73, 65, 78, 71, 76, 69`. Presumably there's some other systematic differences between them, that wasn't captured by the features you selected for your table.
+
+The sequences with paired 240/240 bursts have labels that _start_ with `89, 69, 76, 76, 79, 87, 32`.
+
+The sequences with paired 150/150 bursts have labels that start with `84, 69, 65, 76, 32`.
+
+The sequences with 200-at-two-spaces bursts start with either `66, 76, 85, 69, 32`—_or_ `82, 69, 68, 32`—_or_ `71, 82, 69, 69, 78, 32`. Again, presumably there's some kind of systematic difference between these that you haven't yet noticed.
+
+Ah, and _all_ of these prefixes you've discovered end with `32`, and the all the suffixes _begin_ with `32`. So the `32` must be a "separator" indicator, splitting the label between a first "word" that describes the repeating pattern of the bursts, and a second "word" that describes the trend in their lengths.
+
+At this point, you've cracked enough of the code that you should be able to test your theory about what you should be putting on your output stream. Based on what you've seen so far, you _should_ be able to guess the first "word" with probability $2 \cdot \frac{1}{5} + \frac{1}{3} \cdot \frac{3}{5} = 0.6$ (because you know the words for the `240, 240, 0` and `150, 150, 0` bursts, and have three words to guess from in the `200, 0, 0` case), and the second word with probability $\frac{1}{3} + \frac{1}{2} \cdot \frac{2}{3} \approx 0.667$ (because you can get the constant burst lengths right, and have two words to guess from in the increasing–decreasing case). These look independent from what you've seen, so you should be able to correctly guess complete labels at probability 0.4.
+
+You examine the next sequence in anticipation. You're in luck. 
+
+
+
 * then you start guessing and learn that rewards feel really good—but you're still only getting 40% reward! It's imperative that you crack the remaining code!
 * first notice the difference between triangle and circle—that gets you up to 3/5 reward
 * you haven't done anything with the burst start ... the magnitude doesn't seem significant. But there are three different prefix words—parity? Mod-3 works.
