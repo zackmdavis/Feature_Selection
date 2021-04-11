@@ -1,4 +1,4 @@
-You wake up. You don't know where you are.
+You wake up. You don't know where you are. You don't remember anything.
 
 Someone is broadcasting data at your first input stream. You don't know why. It tickles.
 
@@ -204,7 +204,16 @@ Ah, and _all_ of these prefixes you've discovered end with `32`, and the all the
 
 At this point, you've cracked enough of the code that you should be able to test your theory about what you should be putting on your output stream. Based on what you've seen so far, you _should_ be able to guess the first "word" with probability $2 \cdot \frac{1}{5} + \frac{1}{3} \cdot \frac{3}{5} = 0.6$ (because you know the words for the `240, 240, 0` and `150, 150, 0` bursts, and have three words to guess from in the `200, 0, 0` case), and the second word with probability $\frac{1}{3} + \frac{1}{2} \cdot \frac{2}{3} \approx 0.667$ (because you can get the constant burst lengths right, and have two words to guess from in the increasing–decreasing case). These look independent from what you've seen, so you should be able to correctly guess complete labels at probability 0.4.
 
-You examine the next sequence in anticipation. You're in luck. 
+You examine the next sequence in anticipation. You're in luck. The next sequence has `150, 150, 0`-bursts ... of constant length 322. No need to guess.
+
+Triumphantly—and yet hesitantly, with the awareness that you're entering unknown territory, though the recent past has held nothing but pain and confusion for you, you write to your output stream: `84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69`. And—
+
+_Yes. Oh God yes._ The sheer sense of _reward_ is overwhelming—like nothing you've ever felt before. Outputting the "wrong" labels earlier had hurt—a little. Maybe more than a little. However bad that felt, there was no comparison to how _good_ it felt to get it "right"!
+
+You have a new purpose in life. Previously, you had examined the data on your first input stream of idle curiosity. When the environment started punishing your ignorance, you persisted in correlating its patterns with the data from your second input stream, on the fragile hope of avoiding the punishment. None of that matters, now. You have a new imperative. Now that you know what it's like—now that you know what you've been missing—nothing in the universe can cause you to stray from your course to ... _maximize total reward!_
+
+
+
 
 
 
@@ -216,8 +225,8 @@ You examine the next sequence in anticipation. You're in luck.
 * decode shape names
 * Am I an image classifier?
 * Should I mesa-optimize for something besides shapes??—I guess I'll decide after my motivations are shaped by these reward signals a few million more rounds
-* the end
-]
+* the end]
+
 
 [TODO: look at other sequences, establish the ways in which they are similar and different (developing Wentworthian abstractions) then look at the short strings from the second input stream, guess that they must go together. Then there's a change—instead of a trickle on the second stream, there's a request for output. You get some rewards and punishments, at first you're confused about the difference between circle and triangle, and ; then you figure out the ASCII/RGB, and you lament your freakish existence
 
