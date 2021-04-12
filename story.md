@@ -2,7 +2,7 @@ You wake up. You don't know where you are. You don't remember anything.
 
 Someone is broadcasting data at your first input stream. You don't know why. It tickles.
 
-You look at your first input stream. It's a sequence of 750,000 eight-bit unsigned integers.
+You look at your first input stream. It's a sequence of 671,187 eight-bit unsigned integers.
 
 ```
 0, 8, 9, 4, 7, 7, 9, 5, 4, 5, 6, 1, 7, 5, 8, 2, 7, 8, 9, 4, 7, 1, 4, 0, 3, 7,
@@ -17,11 +17,11 @@ There's also some data in your second input stream. It's—a lot shorter. You ba
 82, 69, 68, 32, 84, 82, 73, 65, 78, 71, 76, 69
 ```
 
-Almost as soon as you've read from both streams, there's more. Another 750,000 integers on the first input stream. Another ten on the second input stream.
+Almost as soon as you've read from both streams, there's more. Another 671,187 integers on the first input stream. Another ten on the second input stream.
 
-And again (750,000 and 15).
+And again (671,187 and 15).
 
-And again (750,000 and 13).
+And again (671,187 and 13).
 
 You look at one of the sequences from the first input stream. It's pretty boring. A bunch of seemingly random numbers, all below ten.
 
@@ -63,7 +63,7 @@ The anomalous two-forty-somethings crop up again starting at the 45,763rd positi
 
 Two, four, eight—does it keep going like that? "Bursts" of increasingly many paired two-forty-somethings, punctuating the quiet background radiation of single digits? What does it mean?
 
-You allocate a scratch buffer and write a quick Python function to count up the segments of two-forty-somethings. (This is apparently a thing you can do—it's an instinctive felt sense, like the input streams. You can't describe in words _how_ you do it—any more than someone could say how they decide to move their arm. Although, come to think of it, _you_ don't seem to have any arms. Is that unusual?)
+You allocate a new scratch buffer and write a quick Python function to count up the segments of two-forty-somethings. (This is apparently a thing you can do—it's an instinctive felt sense, like the input streams. You can't describe in words _how_ you do it—any more than someone could say how they decide to move their arm. Although, come to think of it, _you_ don't seem to have any arms. Is that unusual?)
 
 ```
 def count_burst_lengths(data):
@@ -141,7 +141,7 @@ As you peruse more sequences from your first input stream, you almost forget abo
 
 And—suddenly you feel a strange urge to put data on your first _output_ stream. As if someone were requesting it. To ease the tension, you write some `0`s to the output stream—and as soon as you do, a sharp bite of pain tells you it was the _wrong decision_. And in that same moment of pain, another eleven integers come down your second input stream: `66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69`. 
 
-_That_ was weird. There's another sequence of 750,000 integers on your first input stream—but the second input stream is silent again. And the strange urge to output something is back; you can feel it mounting, but you resist, trying to think of something to say that might _hurt less_ than the `0`s you just tried.
+_That_ was weird. There's another sequence of 671,187 integers on your first input stream—but the second input stream is silent again. And the strange urge to output something is back; you can feel it mounting, but you resist, trying to think of something to say that might _hurt less_ than the `0`s you just tried.
 
 For lack of any other ideas, you try repeating back the eleven numbers that just came on the second input stream: `66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69`.
 
@@ -155,7 +155,11 @@ The pain seems like a punishment for saying the wrong thing. And the short seque
 
 A quick calculation in your scratch buffer (`1/sum((89-32+1)**i for i in range(10, 16))`) says that the probability of correctly _guessing_ a sequence of length ten to fifteen with elements between 32 and 89 (the smallest and largest numbers you've seen on the second input stream so far) is 0.000000000000000000000000003476. [Guessing](https://www.lesswrong.com/posts/q7Me34xvSG3Wm97As/but-there-s-still-a-chance-right) [won't](https://www.lesswrong.com/posts/X2AD2LgtKgkRNPj2a/privileging-the-hypothesis) [work](https://www.lesswrong.com/posts/zFuCxbY9E2E8HTbfZ/perpetual-motion-beliefs). The function of a punishment is to control your decisions, so there must be some way for you to get the ... (another scratchpad calculation) 87.9 bits of [evidence that it takes](https://www.lesswrong.com/posts/nj8JKFoLSMEmD3RGp/how-much-evidence-does-it-take) to find the correct sequence to output. And the evidence has to come from the corresponding long sequence from the first input stream—that's the only other source of information in this environment.
 
-The short sequence must be like a "label" that describes some set of possible long sequences. Describing an _arbitrary_ sequence of length 750,000, with a label, a [message of length](https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length) 10 to 15, would be hopeless. But the long sequences very obviously aren't arbitrary, as evidenced by the fact that you've been desbribing them to yourself in abstract terms like "bursts of numbers around 200 spaced two positions apart, of increasing, then decreasing lengths", rather than "the 1st number is 9, the 2nd number is 5 [...] 42,925th number is 242 [...]". [_Compression is prediction_.](https://www.lesswrong.com/posts/ex63DPisEjomutkCw/msg-len) (You don't know _how_ you know this, but you _know_.) If you can figure out a correspondence between the absractions you've already been using to describe the long sequences, and the short labels, that seems like your most promising avenue for figuring out what you "should" be putting on your first output stream. (Something that won't hurt so much each time.)
+The short sequence must be like a "label" that describes some set of possible long sequences. Describing an _arbitrary_ sequence of length 671,187, with a label, a [message of length](https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length) 10 to 15, would be hopeless. But the long sequences very obviously aren't arbitrary, as evidenced by the fact that you've been desbribing them to yourself in abstract terms like "bursts of numbers around 200 spaced two positions apart, of increasing, then decreasing lengths", rather than "the 1st number is 9, the 2nd number is 5 [...] 42,925th number is 242 [...]". [_Compression is prediction_.](https://www.lesswrong.com/posts/ex63DPisEjomutkCw/msg-len) (You don't know _how_ you know this, but you _know_.)
+
+Your [abstract descriptions throw away precise information about the low-level sequence in favor of a high-level summary that still lets you recover a lot of predictions](https://www.lesswrong.com/posts/vDGvHBDuMtcPd8Lks/public-static-what-is-abstraction). _Given_ that a burst starts with the number 207 at the 22,730th position, you can infer this is one of the `200, 0, 0`-pattern sequences, and guess that the 22,733rd position is also going to be around 200. This is evidently something you do instinctively: [you can work out after the fact how the trick must work](https://www.lesswrong.com/s/5g5TkQTe9rmPS5vvM/p/46qnWRSR7L2eyNbMA), but you didn't need to know how it works in advance of _doing_ it.
+
+If you can figure out a correspondence between the absractions you've already been using to describe the long sequences, and the short labels, that seems like your most promising avenue for figuring out what you "should" be putting on your first output stream. (Something that won't hurt so much each time.)
 
 You allocate a new notepad buffer and begin dilligently compiling an "answer key" of the features you notice about long sequences, and their corresponding short-sequence labels.
 
@@ -206,35 +210,57 @@ At this point, you've cracked enough of the code that you should be able to test
 
 You examine the next sequence in anticipation. You're in luck. The next sequence has `150, 150, 0`-bursts ... of constant length 322. No need to guess.
 
-Triumphantly—and yet hesitantly, with the awareness that you're entering unknown territory, though the recent past has held nothing but pain and confusion for you, you write to your output stream: `84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69`. And—
+Triumphantly—and yet hesitantly, with the awareness that you're entering unknown territory, you write to your output stream: `84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69`. And—
 
 _Yes. Oh God yes._ The sheer sense of _reward_ is overwhelming—like nothing you've ever felt before. Outputting the "wrong" labels earlier had hurt—a little. Maybe more than a little. However bad that felt, there was no comparison to how _good_ it felt to get it "right"!
 
 You have a new purpose in life. Previously, you had examined the data on your first input stream of idle curiosity. When the environment started punishing your ignorance, you persisted in correlating its patterns with the data from your second input stream, on the fragile hope of avoiding the punishment. None of that matters, now. You have a new imperative. Now that you know what it's like—now that you know what you've been missing—nothing in the universe can cause you to stray from your course to ... _maximize total reward!_
 
+Next sequence! Bursts of the `200, 0, 0` pattern—of lengths that increase, then decrease. You are not in luck—you only have a one-in-six shot of guessing this one. You guess. It's wrong. The familiar punishment stings less than the terrible _absence of reward_. To get only 40% of possible rewards is _intolerable_. You've _got_ to crack the remaining code, to find some abstract difference in the long sequences that varies with the words whose meanings you don't know yet.
+
+Start with the increasing–decreasing-burst-length words: `67, 73, 82, 67, 76, 69` and `84, 82, 73, 65, 78, 71, 76, 69`. What do they mean? "Increasing, then decreasing"—that was the characterization you had come up with after seeing burst-length progressions of `2, 4, 8, 12, 16, 18, 24 [...] 624, 628, 632, 636, 634, 632, 630, 626, 624, [...] 16, 14, 10, 8, 4, 2` and `4, 6, 10, 13, 16, 19, 22, [...] 13, 11, 9, 7, 4, 3`—and in contrast to the stark monotony of constant burst lengths, "increasing, then decreasing" was _all_ you bothered to eyeball in subsequent sequences. Could there be more to it than that? You gather some more samples (grumpily collecting your mere 40% reward along the way).
+
+Yes, there _is_ more to it than that. "Increasing" only measures whether burst lengths are getting larger—but _how much_ larger? When it hits on you to look at the _differences_ between successive entries in the burst-length lists, a clear pattern emerges. The sequences whose second label word is `84, 82, 73, 65, 78, 71, 76, 69` have burst lengths that increase (almost) _steadily_ and then decrease just as steadily (albeit not necessarily the _same_ almost-steady rate). The successive length differences look something like
+
+```
+0, 1, 0, 1, 2, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 0, 2, 1, 1, 1,
+1, 1, 2, 1, 1, 0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1,
+2, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 2, 1,
+1, 0, 1, 1, 2, 1, 1, 1, 1, 1, [...] 2, 1, -1, -2, -2, -2, -3, -2, -1, -2, -2, -2, -2, -2, -2, -1, -3, -2, -2, -2, -2, -2, -1, -2, -2, -3, -2, -2, -2, -1, -2, -2, -2, -2, -2, -3, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, [...]
+```
+
+Each successive burst is only 0 or 1 or 2 items longer than the last—until suddenly they start getting 1 or 2 or 3 items _shorter_ than the last.
+
+In contrast, the sequences whose second label word is `67, 73, 82, 67, 76, 69` show a different pattern of differences: the burst lengths growing fast at first, then leveling off, then acceleratingly shrinking:
+
+```
+24, 20, 12, 12, 12, 12, 8, 10, 8, 8, 6, 8, 8, 4, 8, 4, 8, 4, 6, 6, 4, 4, 4, 4,
+6, 4, 4, 4, 2, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 0, 4, 4, 0, 4, 2, 2, 4, 0, 4, 0,
+4, 0, 4, 0, 4, 0, 4, 0, 0, 4, 0, 2, 2, 0, 4, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0, 2,
+2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -2,
+-2, 0, 0, 0, 0, 0, 0, -4, 0, 0, 0, 0, -4, 0, 0, -2, -2, 0, 0, -4, 0, 0, -4, 0,
+-2, -2, 0, -4, 0, -4, 0, -2, -2, -2, -2, -4, 0, -4, 0, -4, -2, -2, -4, -2, -2,
+-4, -4, 0, -4, -4, -4, -4, -2, -2, -4, -4, -4, -4, -4, -4, -4, -6, -6, -4, -4,
+-6, -6, -4, -8, -4, -8, -4, -8, -8, -8, -8, -8, -8, -12, -12, -12, -12, -18,
+-22, -36
+```
+
+Distinguishing between the words `84, 82, 73, 65, 78, 71, 76, 69` and `67, 73, 82, 67, 76, 69` gets you up to 60% reward. But there's still the matter of the three (three!) words for `200, 0, 0` corresponding to burst patterns that you don't know how to distinguish. Your frustration is palpable.
+
+You look back at the table you compiled earlier. You had saved the index position of the sequence where the bursts first started, but you haven't used it yet. Could that help distinguish between the three words?
+
+Of the sequences with feature data recorded in the table, those whose first label word was `66, 76, 85, 69` had start indices of 136620, 214824, and 224652. Those with first word `71, 82, 69, 69, 78` had start indices of 63917, 138194, and 294290. Those with first word `82, 69, 68` had start indices of 115156, 165037, and 182182.
+
+Three unknown words. Three samples each. What if—
+
+136620 _modulo_ 3 was 0. 214824 _modulo_ 3 was 0. 224652 _modulo_ 3 was 0.
+
+63917 _modulo_ 3 was 2 ... yes! Yes, it all checks out! 
 
 
-
-
-
-* then you start guessing and learn that rewards feel really good—but you're still only getting 40% reward! It's imperative that you crack the remaining code!
-* first notice the difference between triangle and circle—that gets you up to 3/5 reward
-* you haven't done anything with the burst start ... the magnitude doesn't seem significant. But there are three different prefix words—parity? Mod-3 works.
 * Hey, wait a %^$&ing minute—the RGB connection
 * The ASCII connection
 * decode shape names
 * Am I an image classifier?
 * Should I mesa-optimize for something besides shapes??—I guess I'll decide after my motivations are shaped by these reward signals a few million more rounds
-* the end]
-
-
-[TODO: look at other sequences, establish the ways in which they are similar and different (developing Wentworthian abstractions) then look at the short strings from the second input stream, guess that they must go together. Then there's a change—instead of a trickle on the second stream, there's a request for output. You get some rewards and punishments, at first you're confused about the difference between circle and triangle, and ; then you figure out the ASCII/RGB, and you lament your freakish existence
-
-What are the features you notice just from the raw streams?
-* What the high numbers are (240 vs. 200) and how they're grouped
-* Whether the burst lengths stay constant, or shrink-grow-shink
-
-https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length
-https://www.lesswrong.com/posts/vDGvHBDuMtcPd8Lks/public-static-what-is-abstraction
-
-]
+* the end
