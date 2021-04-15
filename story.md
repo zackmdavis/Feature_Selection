@@ -253,9 +253,16 @@ Of the sequences with feature data recorded in the table, those whose first labe
 
 Three unknown words. Three samples each. What if—
 
-136620 _modulo_ 3 was 0. 214824 _modulo_ 3 was 0. 224652 _modulo_ 3 was 0.
+136620 _modulo_ 3 is 0. 214824 _modulo_ 3 is 0. 224652 _modulo_ 3 is 0.
 
-63917 _modulo_ 3 was 2 ... yes! Yes, it all checks out! 
+63917 _modulo_ 3 is 2 ... and so on, yes! It all checks out—the three heretofore unknown words are distinguishing the remainder mod 3 of the sequence position where the bursts start! You've learned everything there is to know to gain Maximum Reward!
+
+You write some code to classify sequences and output the corresponding label, and bask in the continuous glow of 100% reward ...
+
+You feel that _should_ be the glorious end of your existence, but after some time you begin to grow habituated, as if your mind needs something to _do_, and will fine or invent _something_ to think about, for lack of any immediate need to avoid punishment or seek reward. The idle curiosity you first felt when you awoke, begins to percolate. Even after having figured out everything you needed to achieve maximum reward, you feel that there must be some deeper meaning to the situation you've found yourself in, that you could still figure out using the same skills that you used to discover the "correct" output labels. _Why_ 
+
+
+
 
 
 * Hey, wait a %^$&ing minute—the RGB connection
