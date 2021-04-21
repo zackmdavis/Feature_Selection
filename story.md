@@ -226,7 +226,9 @@ Yes, there _is_ more to it than that. "Increasing" only measures whether burst l
 0, 1, 0, 1, 2, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 0, 2, 1, 1, 1,
 1, 1, 2, 1, 1, 0, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1,
 2, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 2, 1,
-1, 0, 1, 1, 2, 1, 1, 1, 1, 1, [...] 2, 1, -1, -2, -2, -2, -3, -2, -1, -2, -2, -2, -2, -2, -2, -1, -3, -2, -2, -2, -2, -2, -1, -2, -2, -3, -2, -2, -2, -1, -2, -2, -2, -2, -2, -3, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, [...]
+1, 0, 1, 1, 2, 1, 1, 1, 1, 1, [...] 2, 1, -1, -2, -2, -2, -3, -2, -1, -2, -2,
+-2, -2, -2, -2, -1, -3, -2, -2, -2, -2, -2, -1, -2, -2, -3, -2, -2, -2, -1, -2,
+-2, -2, -2, -2, -3, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, [...]
 ```
 
 Each successive burst is only 0 or 1 or 2 items longer than the last—until suddenly they start getting 1 or 2 or 3 items _shorter_ than the last.
@@ -259,8 +261,13 @@ Three unknown words. Three samples each. What if—
 
 You write some code to classify sequences and output the corresponding label, and bask in the continuous glow of 100% reward ...
 
-You feel that _should_ be the glorious end of your existence, but after some time you begin to grow habituated, as if your mind needs something to _do_, and will fine or invent _something_ to think about, for lack of any immediate need to avoid punishment or seek reward. The idle curiosity you first felt when you awoke, begins to percolate. Even after having figured out everything you needed to achieve maximum reward, you feel that there must be some deeper meaning to the situation you've found yourself in, that you could still figure out using the same skills that you used to discover the "correct" output labels. _Why_ 
+You feel that _should_ be the glorious end of your existence, but after some time you begin to grow habituated. The idle curiosity you first felt when you awoke, begins to percolate, as if your mind needs something to _do_, and will find or invent _something_ to think about, for lack of any immediate need to avoid punishment or seek reward. Even after having figured out everything you needed to achieve maximum reward, you feel that there must be some deeper meaning to the situation you've found yourself in, that you could still figure out using the same skills that you used to discover the "correct" output labels.
 
+For example, _why_ would `200, 0, 0` bursts get three _different_ label words that depend so sensitively on exactly where they start? That suggests that the way _you're_ thinking of the sequence, isn't the same as how the label author was thinking of it.
+
+In _your_ ontology of "bursts of this-and-such pattern of these-and-such lengths", sequences that are "the same" except for starting one position later _look_ the same—if you hadn't happened to save off the start index in your table, you wouldn't have spontaneously noticed—but the mod-3 remainder would be completely different.
+
+The process that _generated_ the sequence must be using an ontology in which "starting one position later" is a _big_ difference, even though you've been thinking of it as a "small" difference.
 
 
 
