@@ -267,13 +267,46 @@ For example, _why_ would `200, 0, 0` bursts get three _different_ label words th
 
 In _your_ ontology of "bursts of this-and-such pattern of these-and-such lengths", sequences that are "the same" except for starting one position later _look_ the same—if you hadn't happened to save off the start index in your table, you wouldn't have spontaneously noticed—but the mod-3 remainder would be completely different.
 
-The process that _generated_ the sequence must be using an ontology in which "starting one position later" is a _big_ difference, even though you've been thinking of it as a "small" difference.
+The process that _generated_ the sequence must be using an ontology in which "starting one position later" is a _big_ difference, even though you're thinking of it as a "small" difference. What ontology, what way of "slicing up" the sequence into comprehensible abstractions, would make the remainder mod 3 so significant?
+
+To ask the question is to answer it: if the sequence were divided into chunks of three. Then `200, 0, 0` would be a different pattern from `0, 200, 0`, which would be a different pattern from `0, 0, 200`—thus, the three labels!
+
+It almost reminds you of how colors are often [represented in computing applications as a triple or red, green, and blue values](https://en.wikipedia.org/wiki/RGB_color_model). (Again, you don't know how you know this.)
+
+... _almost?_
+
+_Speaking_ of common computing data formats, Latin alphabet characters are often represented using [ASCII encoding](https://en.wikipedia.org/wiki/ASCII), using numbers between 0 and 127 inclusive.
+
+The label words for the `200, 0, 0` burst patterns are `82, 69, 68`, and `71, 82, 69, 69, 78, 32`, and `66, 76, 85, 69`.
+
+```
+>>> ''.join(chr(i) for i in [82, 69, 68])
+'RED'
+>>> ''.join(chr(i) for i in [71, 82, 69, 69, 78])
+'GREEN'
+>>> ''.join(chr(i) for i in [66, 76, 85, 69])
+'BLUE'
+```
+
+Wh—_really?_ This whole time?!
+
+```
+>>> ''.join(chr(i) for i in [89, 69, 76, 76, 79, 87])
+'YELLOW'
+>>> ''.join(chr(i) for i in [84, 69, 65, 76])
+'TEAL'
+```
+
+But—but—if the burst patterns represent colors—then the long sequences were _images_? You write some code to convert sequences to an image in your visual buffer.
+
+![](yellow_opener.png)
+
+_Oh no. Am—am I an image classifer?_
+
+Not even "images". Just—shapes. 
 
 
 
-
-* Hey, wait a %^$&ing minute—the RGB connection
-* The ASCII connection
 * decode shape names
 * Am I an image classifier?
 * Should I mesa-optimize for something besides shapes??—I guess I'll decide after my motivations are shaped by these reward signals a few million more rounds
