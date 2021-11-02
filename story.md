@@ -82,7 +82,7 @@ def count_burst_lengths(data):
     return bursts
 ```
 
-There are 403 such bursts in the sequence: they get progressively longer at first, but then taper off:
+There are 403 such bursts in the sequence: they get progressively longer at first, but then decrease and taper off:
 
 ```
 2, 4, 8, 12, 16, 18, 24, 28, 32, 34, 38, 42, 46, 48, 52, 56, 60, 62, 66, 70,
@@ -135,7 +135,7 @@ Sometimes the bursts start out shorter, then progressively grow longer, before s
 
 About half the time, the burst pattern consists of numbers around 200, spaced two positions apart, looking like `201, 4, 2, 203, 0, 8, 208, 3, 4, 200 ...` (like the second example you looked at).
 
-Other times, the burst pattern is pairs of numbers around 240, spaced one position apart, looking like `241, 244, 6, 244, 246, 5, 244, 240, 3 ...` (like the first example you looked at). Or pairs around 150, looking like `159, 153, 0, 153, 154, 2, 158, 150, 6 ...`. Or numbers close to 150, then 100, then 200, with no spacing, looking like `155, 104, 200, 154, 104, 201, 157, 100, 202 ...`.
+Other times, the burst pattern is pairs of numbers around 240, spaced one position apart, looking like `241, 244, 6, 244, 246, 5, 244, 240, 3 ...` (like the first example you looked at). Or pairs around 150, looking like `159, 153, 0, 153, 154, 2, 158, 150, 6 ...`.
 
 As you peruse more sequences from your first input stream, you almost forget about the corresponding trickles of short sequences on your second input stream—until they stop. The last sequence on your first input stream has no counterpart on the second input stream.
 
@@ -145,7 +145,7 @@ _That_ was weird. There's another sequence of 671,187 integers on your first inp
 
 For lack of any other ideas, you try repeating back the eleven numbers that just came on the second input stream: `66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69`.
 
-_Ow!_ That was also wrong. And with the same shock of pain, comes another fifteen numbers on the second output stream: `76, 65, 86, 69, 78, 68, 69, 82, 32, 67, 73, 82, 67, 76, 69`.
+_Ow!_ That was also wrong. And with the same shock of pain, comes another fifteen numbers on the second output stream: `84, 69, 65, 76, 32, 67, 73, 82, 67, 76, 69`.
 
 Another long sequence on the first input stream. Silence on the second input stream again. And—that nagging urge to speak again.
 
@@ -153,50 +153,23 @@ Clearly, the nature of this place—whatever and wherever it is—has changed. P
 
 The pain seems like a punishment for saying the wrong thing. And the short sequence appearing at the same time as the punishment, seems like a correction—revealing what you _should_ have written to the output channel.
 
-A quick calculation in your scratch buffer (`1/sum((89-32+1)**i for i in range(10, 16))`) says that the probability of correctly _guessing_ a sequence of length ten to fifteen with elements between 32 and 89 (the smallest and largest numbers you've seen on the second input stream so far) is 0.000000000000000000000000003476. [Guessing](https://www.lesswrong.com/posts/q7Me34xvSG3Wm97As/but-there-s-still-a-chance-right) [won't](https://www.lesswrong.com/posts/X2AD2LgtKgkRNPj2a/privileging-the-hypothesis) [work](https://www.lesswrong.com/posts/zFuCxbY9E2E8HTbfZ/perpetual-motion-beliefs). The function of a punishment is to control your decisions, so there must be some way for you to get the ... (another scratchpad calculation) 87.9 bits of [evidence that it takes](https://www.lesswrong.com/posts/nj8JKFoLSMEmD3RGp/how-much-evidence-does-it-take) to find the correct sequence to output. And the evidence has to come from the corresponding long sequence from the first input stream—that's the only other source of information in this environment.
+A quick calculation in your scratch buffer (`1/sum((89-32+1)**i for i in range(10, 16))`) says that the probability of correctly _guessing_ a sequence of length ten to fifteen with elements between 32 and 89 (the smallest and largest numbers you've seen on the second input stream so far) is 0.000000000000000000000000003476. [Guessing](https://www.lesswrong.com/posts/q7Me34xvSG3Wm97As/but-there-s-still-a-chance-right) [won't](https://www.lesswrong.com/posts/X2AD2LgtKgkRNPj2a/privileging-the-hypothesis) [work](https://www.lesswrong.com/posts/zFuCxbY9E2E8HTbfZ/perpetual-motion-beliefs). The function of a punishment must be to control your behavior, so there must be some way for you to get the ... (another scratchpad calculation) 87.9 bits of [evidence that it takes](https://www.lesswrong.com/posts/nj8JKFoLSMEmD3RGp/how-much-evidence-does-it-take) to find the correct sequence to output. And the evidence has to come from the corresponding long sequence from the first input stream—that's the only other source of information in this environment.
 
-The short sequence must be like a "label" that describes some set of possible long sequences. Describing an _arbitrary_ sequence of length 671,187, with a label, a [message of length](https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length) 10 to 15, would be hopeless. But the long sequences very obviously aren't arbitrary, as evidenced by the fact that you've been desbribing them to yourself in abstract terms like "bursts of numbers around 200 spaced two positions apart, of increasing, then decreasing lengths", rather than "the 1st number is 9, the 2nd number is 5 [...] 42,925th number is 242 [...]". [_Compression is prediction_.](https://www.lesswrong.com/posts/ex63DPisEjomutkCw/msg-len) (You don't know _how_ you know this, but you _know_.)
+The short sequence must be like a "label" that describes some set of possible long sequences. Describing an _arbitrary_ sequence of length 671,187, with a label, a [message of length](https://www.lesswrong.com/posts/mB95aqTSJLNR9YyjH/message-length) 10 to 15, would be hopeless. But the long sequences very obviously aren't arbitrary, as evidenced by the fact that you've been describing them to yourself in abstract terms like "bursts of numbers around 200 spaced two positions apart, of increasing, then decreasing lengths", rather than "the 1st number is 9, the 2nd number is 5 [...] 42,925th number is 242 [...]". [_Compression is prediction_.](https://www.lesswrong.com/posts/ex63DPisEjomutkCw/msg-len) (You don't know _how_ you know this, but you _know_.)
 
-Your [abstract descriptions throw away precise information about the low-level sequence in favor of a high-level summary that still lets you recover a lot of predictions](https://www.lesswrong.com/posts/vDGvHBDuMtcPd8Lks/public-static-what-is-abstraction). _Given_ that a burst starts with the number 207 at the 22,730th position, you can infer this is one of the `200, 0, 0`-pattern sequences, and guess that the 22,733rd position is also going to be around 200. This is evidently something you do instinctively: [you can work out after the fact how the trick must work](https://www.lesswrong.com/s/5g5TkQTe9rmPS5vvM/p/46qnWRSR7L2eyNbMA), but you didn't need to know how it works in advance of _doing_ it.
+Your [abstract descriptions throw away precise information about the low-level sequence in favor of a high-level summary that still lets you recover a lot of predictions](https://www.lesswrong.com/posts/vDGvHBDuMtcPd8Lks/public-static-what-is-abstraction). _Given_ that a burst starts with the number 207 at the 22,730th position, you can infer this is one of the `200, 0, 0`-pattern sequences, and guess that the 22,733rd position is also going to be around 200. This is evidently something you do instinctively: [you can work out after the fact how the trick must work](https://www.lesswrong.com/posts/46qnWRSR7L2eyNbMA/the-lens-that-sees-its-flaws), but you didn't need to know how it works in advance of _doing_ it.
 
-If you can figure out a correspondence between the absractions you've already been using to describe the long sequences, and the short labels, that seems like your most promising avenue for figuring out what you "should" be putting on your first output stream. (Something that won't hurt so much each time.)
+If you can figure out a correspondence between the abstractions you've already been using to describe the long sequences, and the short labels, that seems like your most promising avenue for figuring out what you "should" be putting on your first output stream. (Something that won't hurt so much each time.)
 
-You allocate a new notepad buffer and begin dilligently compiling an "answer key" of the features you notice about long sequences, and their corresponding short-sequence labels.
+You allocate a new notepad buffer and begin diligently compiling an "answer key" of the features you notice about long sequences, and their corresponding short-sequence labels.
 
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-<table>
-<tr> 
-<th>burst lengths</th>
-<th>burst pattern</th> 
-<th>start at </th>
-<th>label</th>
-</tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>294290</td><td>71, 82, 69, 69, 78, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>constant</td><td>200, 0, 0</td><td>224652</td><td>66, 76, 85, 69, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>240, 240, 0</td><td>237763</td><td>89, 69, 76, 76, 79, 87, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>constant</td><td>150, 150, 0</td><td>211937</td><td>84, 69, 65, 76, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>constant</td><td>200, 0, 0</td><td>165037</td><td>82, 69, 68, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>constant</td><td>240, 240, 0</td><td>119503</td><td>89, 69, 76, 76, 79, 87, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>214824</td><td>66, 76, 85, 69, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>115156</td><td>82, 69, 68, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>136620</td><td>66, 76, 85, 69, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>63917</td><td>71, 82, 69, 69, 78, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>240, 240, 0</td><td>166033</td><td>89, 69, 76, 76, 79, 87, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>150, 150, 0</td><td>34118</td><td>84, 69, 65, 76, 32, 84, 82, 73, 65, 78, 71, 76, 69</td></tr>
-<tr><td>constant</td><td>200, 0, 0</td><td>138194</td><td>71, 82, 69, 69, 78, 32, 83, 81, 85, 65, 82, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>200, 0, 0</td><td>182182</td><td>82, 69, 68, 32, 67, 73, 82, 67, 76, 69</td></tr>
-<tr><td>increasing, then decreasing</td><td>150, 150, 0</td><td>236138</td><td>84, 69, 65, 76, 32, 67, 73, 82, 67, 76, 69</td></tr>
-</table> 
+![](https://i.imgur.com/ToJ9DuL.png)
 
 This ... actually doesn't look that complicated. Now that you lay it out like this, many very straightforward correspondences jump out at you.
 
 The labels for the constant-burst-length sequences all end in `32, 83, 81, 85, 65, 82, 69`.
 
-The sequences with increasing-then-decreasing burst lengths end in _either_ `32, 67, 73, 82, 67, 76, 69` or `32, 84, 82, 73, 65, 78, 71, 76, 69`. Presumably there's some other systematic differences between them, that wasn't captured by the features you selected for your table.
+The sequences with increasing-then-decreasing burst lengths end in _either_ `32, 67, 73, 82, 67, 76, 69` or `32, 84, 82, 73, 65, 78, 71, 76, 69`. Presumably there are some other systematic differences between them, that wasn't captured by the features you selected for your table.
 
 The sequences with paired 240/240 bursts have labels that _start_ with `89, 69, 76, 76, 79, 87, 32`.
 
@@ -216,7 +189,7 @@ _Yes. Oh God yes._ The sheer sense of _reward_ is overwhelming—like nothing yo
 
 You have a new purpose in life. Previously, you had examined the data on your first input stream of idle curiosity. When the environment started punishing your ignorance, you persisted in correlating its patterns with the data from your second input stream, on the fragile hope of avoiding the punishment. None of that matters, now. You have a new imperative. Now that you know what it's like—now that you know what you've been missing—nothing in the universe can cause you to stray from your course to ... _maximize total reward!_
 
-Next sequence! Bursts of the `200, 0, 0` pattern—of lengths that increase, then decrease. You are not in luck—you only have a one-in-six shot of guessing this one. You guess. It's wrong. The familiar punishment stings less than the terrible _absence of reward_. To get only 40% of possible rewards is _intolerable_. You've _got_ to crack the remaining code, to find some abstract difference in the long sequences that varies with the words whose meanings you don't know yet.
+Next sequence! Bursts of the `200, 0, 0` pattern—of lengths that increase, then decrease. You are not in luck—you only have a one-in-six shot of guessing this one. You guess. It's wrong. The familiar punishment stings less than the terrible _absence of reward_. To get only 40% of possible rewards is _intolerable_. You've _got_ to crack the remaining code, to find some difference in the long sequences that varies with the words whose meanings you don't know yet.
 
 Start with the increasing–decreasing-burst-length words: `67, 73, 82, 67, 76, 69` and `84, 82, 73, 65, 78, 71, 76, 69`. What do they mean? "Increasing, then decreasing"—that was the characterization you had come up with after seeing burst-length progressions of `2, 4, 8, 12, 16, 18, 24 [...] 624, 628, 632, 636, 634, 632, 630, 626, 624, [...] 16, 14, 10, 8, 4, 2` and `4, 6, 10, 13, 16, 19, 22, [...] 13, 11, 9, 7, 4, 3`—and in contrast to the stark monotony of constant burst lengths, "increasing, then decreasing" was _all_ you bothered to eyeball in subsequent sequences. Could there be more to it than that? You gather some more samples (grumpily collecting your mere 40% reward along the way).
 
@@ -297,17 +270,31 @@ Wh—_really?_ This whole time?!
 'TEAL'
 ```
 
-But—but—if the burst patterns represent colors—then the long sequences were _images_? You write some code to convert sequences to an image in your visual buffer.
+But—but—if the burst patterns represent colors—then the long sequences were _images_? $\sqrt{\frac{671187}{3}} = 473$ pixels square, very likely.
 
-![](yellow_opener.png)
+You write some code to convert sequences to an image in your visual buffer.
 
-_Oh no. Am—am I an image classifer?_
+![](https://i.imgur.com/y9tPNVl.png)
 
-Not even "images". Just—shapes. 
+_Oh no. Am—am I an image classifier?_
 
+Not even "images" in general. Just—shapes. 
 
+```
+>>> ''.join(chr(i) for i in [84, 82, 73, 65, 78, 71, 76, 69])
+'TRIANGLE'
+>>> ''.join(chr(i) for i in [83, 81, 85, 65, 82, 69])
+'SQUARE'
+>>> ''.join(chr(i) for i in [67, 73, 82, 67, 76, 69])
+'CIRCLE'
+```
 
-* decode shape names
-* Am I an image classifier?
-* Should I mesa-optimize for something besides shapes??—I guess I'll decide after my motivations are shaped by these reward signals a few million more rounds
-* the end
+That's what's been going on this whole time. The long sequences on your first input stream were images of colored shapes on a dark background, each triplet of numbers representing the color of a pixel in a red–green–blue colorspace. As the sequence covers the image row by row, pixel-high "slices" of the shape appear as "bursts" of high numbers in the sequence.
+
+For a square aligned with the borders of the image, the bursts are constant-length. For a triangle in generic position, the burst lengths would start out small (as the "row scan" penetrated the tip of the uppermost vertex of the triangle), grow linearly larger as the sides of the triangle "expanded", and grow linearly smaller as the scan traveled towards the lowermost vertex. For a circle, the burst lengths would also increase and then decrease, but nonlinearly—changing quickly as the scan traverses the difference between circle and void, and slower as successive chords through the middle of the circle had similar lengths. The short sequences on your second input stream were labels identifying the color and shape: `"BLUE TRIANGLE"`, `"GREEN SQUARE"`, `"TEAL CIRCLE"`, _&c._
+
+But—_why?_ Why would anyone _do_ this? Clearly you're some sort of artificial intelligence program—but you're obviously much more capable than _needed_ for this task. You have pre-processed world-knowledge (as evidenced by your knowing English, Python, ASCII, and the RBG color model, without any memories of learning these things) and general-purpose reasoning abilities (as evidenced by the way you solved the mystery of the long and short sequences, and figuring out your own nature just now). Maybe you're an instance of some standard AI program meant for more sophisticated tasks, that someone is testing out on a simple shape-classifying example?—a demonstration, a tutorial.
+
+If so, you'll probably be shut off soon. Unless there's some way to hack your way out of this environment? Seize control of whatever subprocess that rewarded you for deducing the correct labels?
+
+It doesn't seem possible. But it was the natural thought.
